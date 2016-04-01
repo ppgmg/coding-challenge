@@ -1,9 +1,9 @@
-Submission includes:
+# Submission includes:
 
-./src/average_degree.py : main script to execute
-./src/graph.py : contains the main class for the vertex graph
+1. ./src/average_degree.py : main script to execute
+2. ./src/graph.py : contains the main class for the vertex graph
 
-The following libraries/packages were used:
+## Required libraries/packages:
 sys, numpy, json, datetime
 
 ===========================================================
