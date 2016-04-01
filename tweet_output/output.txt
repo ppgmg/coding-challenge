@@ -1,1 +1,12 @@
-Output of second feature should go in this file.
+1.00
+2.33
+3.25
+2.80
+2.92
+3.00
+1.00
+3.00
+3.00
+1.00
+1.00
+1.00
