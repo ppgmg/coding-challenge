@@ -1,3 +1,12 @@
+Submission includes:
+
+./src/average_degree.py : main script to execute
+./src/graph.py : contains the main class for the vertex graph
+
+The following libraries/packages were used:
+sys, numpy, json, datetime
+
+===========================================================
 Insight Data Engineering - Coding Challenge
 ===========================================================
 
@@ -31,7 +40,7 @@ We'd like you to implement your own version of this.  However, we don't want thi
 
 This file `tweets.txt` will contain the actual JSON messages (and the messages emitted by the API about the connection and rate limits, which need to be properly removed from calculations).  `tweets.txt` will have the content of each tweet on a newline:
 
-`tweets.txt`: 
+`tweets.txt`:
 
 	{JSON of first tweet}  
 	{JSON of second tweet}  
@@ -69,7 +78,7 @@ One example of the data for a single Tweet might look like:
 
 Although this contains a lot of information, you will only need the **hashtags** and **created_at** fields of each entry, which are in bold in the above entry.
 
-You will update the Twitter hashtag graph each time you process a new tweet and hence, the average degree of the graph. The graph should only consist of tweets that arrived in the last 60 seconds as compared to the maximum timestamp that has been processed. 
+You will update the Twitter hashtag graph each time you process a new tweet and hence, the average degree of the graph. The graph should only consist of tweets that arrived in the last 60 seconds as compared to the maximum timestamp that has been processed.
 
 As new tweets come in, edges formed with tweets older than 60 seconds from the maximum timestamp being processed should be evicted. For each incoming tweet, only extract the following fields from the JSON response
 
@@ -89,11 +98,11 @@ hashtags = [Flink, Spark],          created_at: Thu Mar 24 17:51:55 +0000 2016
 
 Two hashtags will be connected if and only if they are present in the same tweet. Only tweets that contain two or more **DISTINCT** hashtags can create new edges.
 
-**NOTE:** The order of the tweets coming in **might not be ordered by time** (we'll see an example below on how to deal with tweets which are out of order in time), which mimics what one would get from Twitter's streaming API. 
+**NOTE:** The order of the tweets coming in **might not be ordered by time** (we'll see an example below on how to deal with tweets which are out of order in time), which mimics what one would get from Twitter's streaming API.
 
 A good way to create this graph is with an edge list where an edge is defined by two hashtags that are connected.
 
-In this case, the first tweet that enters the system has a timestamp of `Thu Mar 24 17:51:10 +0000 2016` and the edge formed is 
+In this case, the first tweet that enters the system has a timestamp of `Thu Mar 24 17:51:10 +0000 2016` and the edge formed is
 
 ```
 Spark <-> Apache
@@ -118,7 +127,7 @@ The edge list by first two tweets are:
 #Spark <-> #Apache
 
 #Apache <-> #Hadoop
-#Hadoop <-> #Storm 
+#Hadoop <-> #Storm
 #Storm <-> #Apache
 ```
 
@@ -222,7 +231,7 @@ The rolling average degree is
 ## Maintaining Data within the 60 Second Window
 [Back to Table of Contents](README.md#table-of-contents)
 
-Now let's say that the next tweet comes in and the extracted information is 
+Now let's say that the next tweet comes in and the extracted information is
 
 ```
 hashtags = [Hadoop, Apache], created_at: Thu Mar 24 17:52:12 +0000 2016
@@ -327,7 +336,7 @@ A new edge is added to the graph and the edge list becomes
 #HBase <-> $Spark
 
 #HBase <-> #Flink
-``` 
+```
 The graph can be visualized as
 
 ![tweet-out-of-order](images/htag_graph_6.png)
@@ -430,7 +439,7 @@ You may write your solution in any mainstream programming language such as C, C+
 
 Alternatively, here is example output of the `tree` command:
 
-	├── README.md 
+	├── README.md
 	├── run.sh
 	├── src
 	│   └── average_degree.java
@@ -463,7 +472,7 @@ The tests are stored simply as text files under the `insight_testsuite/tests` fo
 
 You can run the test with the following from the insight_testsuite folder:
 ```bash
-insight_testsuite$ ./run_tests.sh 
+insight_testsuite$ ./run_tests.sh
 ```
 
 The output of `run_tests.sh` should look like:
@@ -478,7 +487,7 @@ on failed tests and
 ```
 on success
 
-One test has been provided as a way to check your formatting and simulate how we will be running tests when you submit your solution. We urge you to write your own additional tests here as well as for your own programming language. `run_tests.sh` should alert you if the directory structure is incorrect. 
+One test has been provided as a way to check your formatting and simulate how we will be running tests when you submit your solution. We urge you to write your own additional tests here as well as for your own programming language. `run_tests.sh` should alert you if the directory structure is incorrect.
 
   **Your submission must pass at least the provided test in order to pass the coding challenge**.  
 
@@ -539,7 +548,7 @@ You should use the hashtags directly from the entity field of the JSON.  Please 
 No, for simplicity you may assume that all the tweets contain at least one word.  However, many tweets won't necessarily contain two hashtags, and may not form new edges in the graph.  This means you will have to test properly when implementing your solution for real data.   
 
 * *Do I need to update the average when the next tweet in the file falls outside the 60-second window?*  
-Yes, you're average should be updated each time a new tweet is processed, regardless of if it falls outside the window.  Thus, if there are 500 tweets in the `tweets.txt`, then there should be 500 averages in `output.txt`.  The only input that should be ignored are the rate-limit messages discussed above. 
+Yes, you're average should be updated each time a new tweet is processed, regardless of if it falls outside the window.  Thus, if there are 500 tweets in the `tweets.txt`, then there should be 500 averages in `output.txt`.  The only input that should be ignored are the rate-limit messages discussed above.
 
 * *Do I need to account for JSON messages that looks like `{"limit": {"track":5,"timestamp_ms":"1446218985743"} }`, which appear in the example from the data generator?*  
 These are messages from the Twitter API that result from the rate-limit.  Your solution needs to properly remove these messages from the input.
@@ -566,7 +575,7 @@ Yes, you can use what ever tools you want -  as long as your `run.sh` script cor
 You can put any text file you want in the directory.  In fact, this could be quite helpful for testing your solutions.
 
 * *How will the coding challenge be evaluated?*  
-Generally, we will evaluate your coding challenge with a testing suite that provides a variety of input tweets and checks the corresponding output.  This suite will attempt to use your `run.sh` and is fairly tolerant to different runtime environments.  Of course, there are many aspects (e.g. clean code, documentation) that cannot be tested by our suite, so each submission will also be reviewed manually by a person. 
+Generally, we will evaluate your coding challenge with a testing suite that provides a variety of input tweets and checks the corresponding output.  This suite will attempt to use your `run.sh` and is fairly tolerant to different runtime environments.  Of course, there are many aspects (e.g. clean code, documentation) that cannot be tested by our suite, so each submission will also be reviewed manually by a person.
 
 * *How long will it take for me to hear back from you about my submission?*  
 We receive hundreds of submissions and try to evaluate them all in a timely manner.  We try to get back to all applicants within two or three weeks of submission, but if you have a specific deadline that requires expedited review, you may email us at cc@insightdataengineering.com.  
